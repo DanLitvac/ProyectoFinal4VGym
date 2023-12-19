@@ -1,0 +1,31 @@
+
+.navbar-brand {
+    color: #d9534f; 
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  .navbar {
+    background-color: #f2f2f2; 
+  }
+
+  .container, .navbar {
+    width: 100%;
+    padding-right: 0;
+    padding-left: 0;}
+
+    #logo{
+        width: 100px;
+        height: 100px;
+        margin: 0 auto;
+        display: block;
+        padding: 10px;
+        border-radius: 50%;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        transition: all 0.5s ease-in-out;
+        cursor: pointer;
+        &:hover{
+            transform: rotate(180deg);
+        }
+    }
