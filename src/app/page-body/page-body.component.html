@@ -1,21 +1,15 @@
-<nav class="navbar navbar-expand-lg">
-    <div class="container">
-      <!-- El logo y el texto estarán centrados dentro del enlace -->
-      <a class="navbar-brand m-auto" href="#">
-        4V GYM
-      </a>
-    </div>
-  </nav>
+
     <div class="col-md-4">
 
 
-        
+      <ngbd-datepicker-basic></ngbd-datepicker-basic>
 
 
     
     </div>
     <div class="col-md-8">
-      <h2>7 Diciembre 2023</h2>
+      <h2>{{ date | date: 'MMMM y' }}</h2>
+
       <!-- Aquí irían las tarjetas de las actividades -->
       <div class="card mb-3">
         <div class="card-body">
