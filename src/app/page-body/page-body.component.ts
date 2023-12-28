@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgbdDatepickerBasic } from "../date-picker/date-picker.component";
 import { DateService } from '../servicies/month-year.service';
 import { CommonModule } from '@angular/common';
+import { ViewChild } from '@angular/core';
 
 @Component({
     selector: 'app-page-body',
@@ -11,10 +12,11 @@ import { CommonModule } from '@angular/common';
     imports: [NgbdDatepickerBasic, CommonModule]
 })
 export class PageBodyComponent implements OnInit {
+    @ViewChild(NgbdDatepickerBasic) datepickerComponent!: NgbdDatepickerBasic;
     date!: Date;
 
     constructor(private dateService: DateService) {}
-
+    
     ngOnInit() {
         this.dateService.currentDate.subscribe(date => {
             
@@ -22,5 +24,10 @@ export class PageBodyComponent implements OnInit {
             // Additional logging to debug
             console.log('Date updated:', this.date);
         });
+    }
+    updateMonth(step: number) {
+        if (this.datepickerComponent) {
+            this.datepickerComponent.changeMonth(step);
+        }
     }
 }

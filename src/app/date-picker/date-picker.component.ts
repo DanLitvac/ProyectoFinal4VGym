@@ -3,6 +3,8 @@ import { NgbDatepicker, NgbCalendar, NgbDatepickerModule, NgbDateStruct } from '
 import { FormsModule } from '@angular/forms';
 import { JsonPipe } from '@angular/common';
 import { DateService } from '../servicies/month-year.service';
+import { HostListener } from '@angular/core';
+
 
 @Component({
     selector: 'ngbd-datepicker-basic',
@@ -24,4 +26,33 @@ export class NgbdDatepickerBasic {
         this.dateService.changeDate(newDate);
     }
 
+    @HostListener('window:keydown', ['$event'])
+    handleKeyboardEvent(event: KeyboardEvent) {
+        if (event.key === 'ArrowLeft') {
+            this.changeMonth(-1);
+        } else if (event.key === 'ArrowRight') {
+            this.changeMonth(1);
+        }
+    }
+
+    public changeMonth(step: number) {
+        let newMonth = this.date.month + step;
+        let newYear = this.date.year;
+    
+        if (newMonth < 1) {
+            newMonth = 12;
+            newYear -= 1;
+        } else if (newMonth > 12) {
+            newMonth = 1;
+            newYear += 1;
+        }
+    
+        this.date = { year: newYear, month: newMonth };
+        this.datepicker.navigateTo({ year: newYear, month: newMonth });
+        this.dateService.changeDate(new Date(newYear, newMonth - 1, 1));
+    }
+    
+
 }
+
+
