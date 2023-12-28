@@ -17,6 +17,7 @@ export class PageBodyComponent implements OnInit {
 
     ngOnInit() {
         this.dateService.currentDate.subscribe(date => {
+            
             this.date = date;
             // Additional logging to debug
             console.log('Date updated:', this.date);

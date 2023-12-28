@@ -1,0 +1,36 @@
+.card-header-4v {
+    background-color: #f8f9fa;
+    border-bottom: 0;
+}
+.card-4v {
+    margin-bottom: 1rem;
+}
+.bg-free {
+    background-color: #28a745;
+    color: white;
+}
+.activity-icon {
+    display: inline-block;
+    margin-right: 10px;
+}
+.month-navigator {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+#mes {
+    margin-bottom: 1%;
+}
+
+.arrow {
+    cursor: pointer;
+    user-select: none;
+    padding: 0 10px; /* Adjust padding as needed */
+    font-size: 1.5em; /* Adjust the size of the arrow */
+}
+
+/* Styling for the h2 element */
+.month-navigator h2 {
+    margin: 0 10px; /* Adjust margins as needed */
+}
