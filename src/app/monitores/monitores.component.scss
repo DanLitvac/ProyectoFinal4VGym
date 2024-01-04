@@ -1,0 +1,44 @@
+.search-container input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+  }
+  
+  .card-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 20px;
+    gap: 20px;
+  }
+  
+  .card {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    text-align: center;
+    padding: 20px;
+    width: 200px; /* Ajusta según el tamaño que desees */
+  }
+  
+  .card img {
+    width: 50px; /* Ajusta según el tamaño del ícono de perfil */
+    margin-bottom: 10px;
+  }
+  
+  .navigation .arrow {
+    font-size: 50px;
+    color: #ccc;
+    text-decoration: none;
+  }
+  
+  .add-button {
+    font-size: 50px;
+    color: #ff0000; /* o el color que prefieras para el signo + */
+    text-decoration: none;
+    position: absolute;
+    right: 20px;
+    top: 20px; /* Ajusta según la posición que prefieras */
+  }
+  

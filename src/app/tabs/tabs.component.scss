@@ -1,0 +1,24 @@
+
+
+.nav-tabs-custom {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border-bottom: 2px solid #dee2e6;
+  }
+  
+  .nav-tabs-custom .tab {
+    padding: 10px 30px;
+    cursor: pointer;
+    border-bottom: 3px solid transparent; /* Invisible border to prevent jumps */
+  }
+  
+  .nav-tabs-custom .tab.active {
+    border-bottom: 3px solid #ff0000; /* Red bottom border for active tab */
+    color: #ff0000;
+  }
+  
+  .nav-tabs-custom .tab:not(.active) {
+    color: #000;
+  }
+  

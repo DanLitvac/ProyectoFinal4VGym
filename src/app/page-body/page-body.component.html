@@ -1,47 +1,52 @@
-      <div class="container mt-4">
+     
+     <div class="container mt-4">
         <div class="row">
             <div class="col-md-4">
 
 
-                <ngbd-datepicker-basic></ngbd-datepicker-basic>
+                <ngbd-datepicker-basic (dateChanged)="onDateChange($event)"></ngbd-datepicker-basic>
           
           
               
               </div>
-            <div class="col-md-8">
-
-                <div id="mes" class="card">
-                    <div class="card-body">
-                        <div class="month-navigator text-center">
-
-                            <div class="month-navigator text-center">
-                                <span class="arrow left-arrow" (click)="updateMonth(-1)">&#8592;</span>
-                                <h2>{{ date | date: 'MMMM y' }}</h2>
-                                <span class="arrow right-arrow" (click)="updateMonth(1)"> &#8594;</span>
-                            </div>
-                            
-                        </div>
-                    </div>
-                </div>
-            
-                <div class="card card-4v">
-                    <div class="card-header card-header-4v">
-                        <h5 class="card-title">10:00 - 11:30</h5>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">Miguel Goyena</p>
-                    </div>
-                </div>
-                <div class="card card-4v bg-free">
-                    <div class="card-header card-header-4v">
-                        <h5 class="card-title">13:30 - 15:00</h5>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">FREE</p>
-                        <button type="button" class="btn btn-light btn-sm">+</button>
-                    </div>
-                </div>
-                <!-- Repeat for other activities -->
-            </div>
+             <!-- Columna de las tarjetas de citas -->
+    <div class="col-md-8">
+      <!-- Navegador del mes -->
+      <div id="mes" class="card mb-3">
+        <div class="card-body">
+          <div class="month-navigator text-center">
+            <span class="arrow left-arrow" (click)="updateMonth(-1)">&#8592;</span>
+            <h2>{{ date | date: 'd MMMM y' }}</h2>
+            <span class="arrow right-arrow" (click)="updateMonth(1)"> &#8594;</span>
+          </div>
         </div>
+      </div>
+      
+      <!-- Tarjeta de cita ocupada -->
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title"><i class="fas fa-user"></i> 10:00 - 11:30</h5>
+          <p class="card-text">Miguel Goyena <i class="fas fa-pencil-alt"></i></p>
+        </div>
+      </div>
+      
+      <!-- Tarjeta de tiempo libre -->
+      <div class="card text-white bg-success mb-3">
+        <div class="card-body">
+          <h5 class="card-title"><i class="fas fa-plus-circle"></i> 13:30 - 15:00</h5>
+          <p class="card-text">FREE</p>
+        </div>
+      </div>
+      
+      <!-- Tarjeta de cita con múltiples personas -->
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title"><i class="fas fa-user-friends"></i> 17:30 - 19:00</h5>
+          <p class="card-text">Miguel Goyena y Lucia Rodriguez <i class="fas fa-pencil-alt"></i></p>
+        </div>
+      </div>
+      
+      <!-- Añade más tarjetas aquí si es necesario -->
     </div>
+  </div>
+</div>
