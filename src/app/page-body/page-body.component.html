@@ -32,7 +32,7 @@
           <div class="card-text">
             {{ card.isFree ? 'FREE' : (card.participants?.join(' y ') + ' ') }}
             <div class="icon-container">
-                <i *ngIf="!card.isFree" class="fas fa-pencil-alt editar" (click)="open(content)"></i>
+                <i *ngIf="!card.isFree" class="fas fa-pencil-alt editar" (click)="openEditModal(card, content)"></i>
                 <i *ngIf="!card.isFree" class="fa-solid fa-trash borrar" (click)="deleteCard(card)"></i>
               </div>
           </div>
@@ -54,15 +54,16 @@
               <div class="form-group">
                 <label for="tipoActividad">Tipo Actividad</label>
                 <select class="form-control" id="tipoActividad" formControlName="tipoActividad">
-                  <option value="Spinning">Spinning</option>
-                  <option value="Pilates">Pilates</option>
-                  <option value="BodyPump">BodyPump</option>
-                </select>
+                    <option [value]="'Spinning'">Spinning</option>
+                    <option [value]="'Pilates'">Pilates</option>
+                    <option [value]="'BodyPump'">BodyPump</option>
+                  </select>
+                  
               </div>
               <div class="form-group">
                 <label for="monitor1">Monitor 1</label>
                 <select class="form-control" id="monitor1" formControlName="monitor1">
-                  <option value="Monitor 1">Monitor 1</option>
+                  <option value="Miguel Goyena">Miguel Goyena</option>
                   <option value="Monitor N">Monitor N</option>
                 </select>
               </div>

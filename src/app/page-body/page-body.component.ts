@@ -73,11 +73,15 @@ export class PageBodyComponent implements OnInit {
          });
       
           // Reaccionar a cambios en el campo de actividad
-          this.activityForm.get('tipoActividad')!.valueChanges.subscribe(value => {
+          this.activityForm.get('tipoActividad')?.valueChanges.subscribe(value => {
             this.isBodyPumpSelected = value === 'BodyPump';
             if (!this.isBodyPumpSelected) {
-              this.activityForm.get('monitor2')!.reset();
+              this.activityForm.get('monitor2')?.reset();
+              this.activityForm.get('monitor2')?.clearValidators();
+            } else {
+              this.activityForm.get('monitor2')?.setValidators(Validators.required);
             }
+            this.activityForm.get('monitor2')?.updateValueAndValidity();
           });
     
     }
@@ -102,8 +106,45 @@ export class PageBodyComponent implements OnInit {
         this.inputDataService.deleteCard(card);
     }
     
+    // openEditModal(card: CardData, modalContent: any) {
+    //     // Configura 'isBodyPumpSelected' en base a si el tipo de actividad es 'BodyPump'
+    //     this.isBodyPumpSelected = card.activityType === 'BodyPump';
+      
+    //     // Configura el formulario con los valores de la tarjeta
+    //     this.activityForm.patchValue({
+    //       tipoActividad: card.activityType,
+    //       monitor1: card.participants && card.participants.length > 0 ? card.participants[0] : '',
+    //       monitor2: this.isBodyPumpSelected && card.participants && card.participants.length > 1 ? card.participants[1] : ''
+          
+    //     });
+    //   console.log(card.participants);
+    //     // Actualiza la validación del campo monitor2 en función de si la actividad es BodyPump
+    //     if (this.isBodyPumpSelected) {
+    //       this.activityForm.get('monitor2')?.setValidators(Validators.required);
+    //     } else {
+    //       this.activityForm.get('monitor2')?.clearValidators();
+    //     }
+    //     this.activityForm.get('monitor2')?.updateValueAndValidity();
+      
+    //     // Abre el modal
+    //     this.modalService.open(modalContent, { ariaLabelledBy: 'modal-basic-title' });
+    //   }
 
+    openEditModal(card: CardData, modalContent: any) {
+        this.isBodyPumpSelected = card.activityType === 'BodyPump';
 
+        const monitor1 = card.participants!.length > 0 ? card.participants![0] : '';
+        const monitor2 = this.isBodyPumpSelected && card.participants!?.length > 1 ? card.participants![1] : '';
+
+        this.activityForm.patchValue({
+            tipoActividad: card.activityType,
+            monitor1: monitor1,
+            monitor2: monitor2
+        });
+
+        this.modalService.open(modalContent, { ariaLabelledBy: 'modal-basic-title' });
+    }
+      
 
 
 

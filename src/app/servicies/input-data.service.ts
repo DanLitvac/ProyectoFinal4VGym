@@ -21,6 +21,12 @@ export enum CardTitle {
   CitaConMultiplesPersonas = "Cita con Múltiples Personas"
 }
 
+export enum Participants {
+  MiguelGoyena= "Miguel Goyena",
+  LuciaRodriguez = "Lucia Rodriguez",
+  JuanPerez = "Juan Perez"
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -30,9 +36,9 @@ export class CardDataService {
 
 
   private cards: CardData[] = [
-    { time: "10:00 - 11:30", date: new Date("2023-11-21"), title: CardTitle.CitaOcupada, isFree: false, activityType: ActivityType.BodyPump, participants: ["Miguel Goyena"] },
+    { time: "10:00 - 11:30", date: new Date("2023-11-21"), title: CardTitle.CitaOcupada, isFree: false, activityType: ActivityType.Spinning, participants: ["Miguel Goyena"] },
     { time: "13:30 - 15:00", date: new Date("2023-11-21"), title: CardTitle.TiempoLibre, isFree: true },
-    { time: "17:30 - 19:00", date: new Date("2023-11-21"), title: CardTitle.CitaConMultiplesPersonas, isFree: false, activityType: ActivityType.Spinning, participants: ["Miguel Goyena", "Lucia Rodriguez"] }
+    { time: "17:30 - 19:00", date: new Date("2023-11-21"), title: CardTitle.CitaConMultiplesPersonas, isFree: false, activityType: ActivityType.BodyPump, participants: ["Miguel Goyena", "Lucia Rodriguez"] }
   ];
 
   constructor() { 
