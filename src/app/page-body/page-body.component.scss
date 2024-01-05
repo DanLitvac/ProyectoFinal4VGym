@@ -1,36 +1,79 @@
 .card-header-4v {
-    background-color: #f8f9fa;
-    border-bottom: 0;
+  background-color: #f8f9fa;
+  border-bottom: 0;
 }
-.card-4v {
-    margin-bottom: 1rem;
+
+
+.card {
+  border: 1px solid #e3e6f0;
+  border-radius: .35rem;
+  background-color: #fff;
+  box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
 }
-.bg-free {
-    background-color: #28a745;
-    color: white;
-}
-.activity-icon {
-    display: inline-block;
-    margin-right: 10px;
-}
-.month-navigator {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+.borrar {
 
 }
-#mes {
-    margin-bottom: 1%;
+.editar {
+
 }
+
+
+.month-navigator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.icon-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+   
+  }
+
+#mes {
+  margin-bottom: 1%;
+}
+
+.card-body {
+    position: relative; /* Necesario para el posicionamiento absoluto de los hijos */
+  }
+  .icon-container {
+    position: absolute;
+    top: 20%; /* Ajusta según sea necesario */
+    right: 1%; /* Ajusta según sea necesario */
+  }
+
+
+  .card-body {
+    padding: 20px; /* Ajusta según sea necesario */
+  }
+  .icon-container {
+    margin: 0; /* Ajusta según sea necesario */
+  }
+
+  .icon-container i {
+    font-size: 30px; /* O un tamaño adecuado */
+  }
+
+    .icon-container i:hover {
+        cursor: pointer;
+    }
 
 .arrow {
-    cursor: pointer;
-    user-select: none;
-    padding: 0 10px; /* Adjust padding as needed */
-    font-size: 1.5em; /* Adjust the size of the arrow */
+  cursor: pointer;
+  user-select: none;
+  padding: 0 10px;
+  /* Adjust padding as needed */
+  font-size: 1.5em;
+  /* Adjust the size of the arrow */
 }
 
 /* Styling for the h2 element */
 .month-navigator h2 {
-    margin: 0 10px; /* Adjust margins as needed */
+  margin: 0 10px;
+  /* Adjust margins as needed */
 }

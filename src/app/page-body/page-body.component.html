@@ -22,30 +22,55 @@
         </div>
       </div>
       
-      <!-- Tarjeta de cita ocupada -->
-      <div class="card mb-3">
+     <!-- card.component.html -->
+     <div *ngFor="let card of cards" class="card mb-3" [ngClass]="{'text-white bg-success': card.isFree}">
         <div class="card-body">
-          <h5 class="card-title"><i class="fas fa-user"></i> 10:00 - 11:30</h5>
-          <p class="card-text">Miguel Goyena <i class="fas fa-pencil-alt"></i></p>
+          <h5 class="card-title">
+            <i [class]="getCardIconClass(card)"></i>
+            {{ card.time }}
+          </h5>
+          <div class="card-text">
+            {{ card.isFree ? 'FREE' : (card.participants?.join(' y ') + ' ') }}
+            <div class="icon-container">
+                <i *ngIf="!card.isFree" class="fas fa-pencil-alt editar" (click)="open(content)"></i>
+                <i *ngIf="!card.isFree" class="fa-solid fa-trash borrar" (click)="deleteCard(card)"></i>
+              </div>
+          </div>
+
         </div>
       </div>
-      
-      <!-- Tarjeta de tiempo libre -->
-      <div class="card text-white bg-success mb-3">
-        <div class="card-body">
-          <h5 class="card-title"><i class="fas fa-plus-circle"></i> 13:30 - 15:00</h5>
-          <p class="card-text">FREE</p>
+
+
+
+      <ng-template #content let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title">Editar</h4>
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
-      </div>
-      
-      <!-- Tarjeta de cita con múltiples personas -->
-      <div class="card mb-3">
-        <div class="card-body">
-          <h5 class="card-title"><i class="fas fa-user-friends"></i> 17:30 - 19:00</h5>
-          <p class="card-text">Miguel Goyena y Lucia Rodriguez <i class="fas fa-pencil-alt"></i></p>
+        <div class="modal-body">
+        
         </div>
-      </div>
-      
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">Cerrar</button>
+        </div>
+      </ng-template>
+  
+
+
+
+
+
+
+
+
+  <div *ngFor="let card of cards">
+    <!-- Debug: Imprime el objeto card -->
+    <pre>{{ card | json }}</pre>
+    <!-- Tu tarjeta aquí -->
+  </div>
+  
       <!-- Añade más tarjetas aquí si es necesario -->
     </div>
   </div>
