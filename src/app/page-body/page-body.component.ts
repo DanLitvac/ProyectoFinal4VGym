@@ -8,6 +8,7 @@ import { TabsComponent } from "../tabs/tabs.component";
 import { CardData, CardDataService } from '../servicies/input-data.service';
 import { Subject, takeUntil } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 
 @Component({
@@ -15,11 +16,17 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
     standalone: true,
     templateUrl: './page-body.component.html',
     styleUrl: './page-body.component.scss',
-    imports: [NgbdDatepickerBasic, CommonModule, NavBarComponent, TabsComponent]
+    imports: [NgbdDatepickerBasic, CommonModule, NavBarComponent, TabsComponent, ReactiveFormsModule]
 })
 
 export class PageBodyComponent implements OnInit {
     @ViewChild(NgbdDatepickerBasic) datepickerComponent!: NgbdDatepickerBasic;
+   
+   
+    activityForm!: FormGroup;
+    isBodyPumpSelected: boolean = false;
+
+
     date!: Date;
     cards: CardData[] = [];
 
@@ -34,7 +41,7 @@ export class PageBodyComponent implements OnInit {
         return 'fas fa-user';
       }
 
-    constructor(private dateService: DateService , private inputDataService : CardDataService , private modalService: NgbModal) {}
+    constructor(private dateService: DateService , private inputDataService : CardDataService , private modalService: NgbModal,private fb: FormBuilder) {}
     
 
     open(content: any) {
@@ -57,6 +64,22 @@ export class PageBodyComponent implements OnInit {
             // Additional logging to debug
             console.log('Date updated:', this.date);
         });
+
+
+        this.activityForm = this.fb.group({
+            tipoActividad: ['', Validators.required],
+            monitor1: ['', Validators.required],
+            monitor2: ['']  
+         });
+      
+          // Reaccionar a cambios en el campo de actividad
+          this.activityForm.get('tipoActividad')!.valueChanges.subscribe(value => {
+            this.isBodyPumpSelected = value === 'BodyPump';
+            if (!this.isBodyPumpSelected) {
+              this.activityForm.get('monitor2')!.reset();
+            }
+          });
+    
     }
 
     ngOnDestroy() {
@@ -79,4 +102,11 @@ export class PageBodyComponent implements OnInit {
         this.inputDataService.deleteCard(card);
     }
     
+
+
+
+
+
+        
+  
 }
