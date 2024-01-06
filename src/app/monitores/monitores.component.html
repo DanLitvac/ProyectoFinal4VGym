@@ -1,41 +1,49 @@
+
 <div class="search-container">
     <input type="text" placeholder="Buscar..." />
   </div>
-  
-  <div class="card-container">
-    <div class="navigation">
-      <a href="#previous" class="arrow">«</a>
-    </div>
-    
-    <!-- Las tarjetas de información de los monitores -->
-    <div class="card">
-      <img src="path_to_icon" alt="Ícono de perfil" />
-      <h3>Miguel Goyena</h3>
-    <p>miguel_goyena&#64;cuatrovientos.org</p>
-      <p>6432341313</p>
-    </div>
-    
-    <div class="card">
-      <img src="path_to_icon" alt="Ícono de perfil" />
-      <h3>Lurdes Domínguez</h3>
-      <p>ldominguez&#64;gmail.com</p>
-      <p>6432341313</p>
-    </div>
-    
-    <div class="card">
-      <img src="path_to_icon" alt="Ícono de perfil" />
-      <h3>Joaquín Rodríguez</h3>
-      <p>jrodrig&#64;hotmail.es</p>
-      <p>6432341313</p>
-    </div>
-
-
-
-    <div class="navigation">
-        <a href="#next" class="arrow">»</a>
+  <div class="carousel-container">
+  <ngb-carousel *ngIf="participants.length > 0" >
+    <ng-template ngbSlide *ngFor="let participant of participants; let i = index">
+      <div class="card">
+        <h3>{{ participant.name }}</h3>
+        <p>{{ participant.email }}</p>
+        <p>{{ participant.phone }}</p>
       </div>
+    </ng-template>
+  </ngb-carousel>
+</div>
 
+      <a href="javascript:void(0)" class="add-button" (click)="openAddParticipantModal()">+</a>
 
-    <a href="#add" class="add-button">+</a>
-  </div>
+  
+  
+  <ng-template #addParticipantModal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Agregar Participante</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="participantForm">
+        <div class="form-group">
+          <label for="name">Nombre</label>
+          <input type="text" class="form-control" id="name" formControlName="name">
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" class="form-control" id="email" formControlName="email">
+        </div>
+        <div class="form-group">
+          <label for="phone">Teléfono</label>
+          <input type="text" class="form-control" id="phone" formControlName="phone">
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">Cerrar</button>
+      <button type="button" class="btn btn-primary" (click)="submitParticipant()">Guardar</button>
+    </div>
+  </ng-template>
   

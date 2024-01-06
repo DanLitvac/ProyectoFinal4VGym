@@ -2,12 +2,17 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 export interface CardData {
-  time: string;
-  date: Date; 
-  title: CardTitle; 
+  time?: string;
+  date?: Date; 
+  title?: CardTitle; 
   activityType?: ActivityType; 
   isFree: boolean;
-  participants?: string[]; 
+  participants?: Participant[];
+}
+export interface Participant {
+  name: string;
+  email: string;
+  phone: string;
 }
 export enum ActivityType {
   Pilates = "Pilates",
@@ -21,11 +26,7 @@ export enum CardTitle {
   CitaConMultiplesPersonas = "Cita con Múltiples Personas"
 }
 
-export enum Participants {
-  MiguelGoyena= "Miguel Goyena",
-  LuciaRodriguez = "Lucia Rodriguez",
-  JuanPerez = "Juan Perez"
-}
+
 
 @Injectable({
   providedIn: 'root'
@@ -34,24 +35,34 @@ export class CardDataService {
   private cardsSource: BehaviorSubject<CardData[]> = new BehaviorSubject<CardData[]>([]);
   currentCards: Observable<CardData[]> = this.cardsSource.asObservable();
 
+  private participantsSource: BehaviorSubject<Participant[]> = new BehaviorSubject<Participant[]>([]);
+  currentParticipants: Observable<Participant[]> = this.participantsSource.asObservable();
 
   private cards: CardData[] = [
-    { time: "10:00 - 11:30", date: new Date("2023-11-21"), title: CardTitle.CitaOcupada, isFree: false, activityType: ActivityType.Spinning, participants: ["Miguel Goyena"] },
+    { time: "10:00 - 11:30", date: new Date("2023-11-21"), title: CardTitle.CitaOcupada, isFree: false, activityType: ActivityType.Spinning, participants: [{ name: "Miguel Goyena", email: "miguel@email.com", phone: "123456789" }] },
     { time: "13:30 - 15:00", date: new Date("2023-11-21"), title: CardTitle.TiempoLibre, isFree: true },
-    { time: "17:30 - 19:00", date: new Date("2023-11-21"), title: CardTitle.CitaConMultiplesPersonas, isFree: false, activityType: ActivityType.BodyPump, participants: ["Miguel Goyena", "Lucia Rodriguez"] }
+    { time: "17:30 - 19:00", date: new Date("2023-11-21"), title: CardTitle.CitaConMultiplesPersonas, isFree: false, activityType: ActivityType.BodyPump, participants: [{ name: "Miguel Goyena", email: "miguel@email.com", phone: "123456789" }, { name: "Lucia Rodriguez", email: "lucia@email.com", phone: "12343219" }] }
   ];
 
   constructor() { 
     this.cardsSource.next(this.cards);
+    this.participantsSource.next(this.getAllParticipants());
   }
 
   getCard(): CardData[] {
     return this.cardsSource.getValue();
   }
 
-  addCard(card: CardData) {
+
+
+  editCard(updatedCard: CardData) {
     const currentCards = this.getCard();
-    this.cardsSource.next([...currentCards, card]);
+    const cardIndex = currentCards.findIndex(card => card.time === updatedCard.time);
+    if (cardIndex !== -1) {
+      
+      currentCards[cardIndex] = updatedCard;
+    }
+    this.cardsSource.next(currentCards);
   }
 
   deleteCard(card: CardData) {
@@ -60,4 +71,30 @@ export class CardDataService {
     card.participants = [];
     this.cardsSource.next([...currentCards, card]);
   }
+
+
+  
+  getAllParticipants(): Participant[] {
+    const allParticipants = this.cardsSource.getValue()
+      .map(card => card.participants || [])
+      .reduce((acc, participants) => acc.concat(participants), []);
+
+    // Filtrar participantes duplicados basados en un criterio (p. ej., email)
+    const uniqueParticipants = allParticipants.filter((participant, index, self) =>
+      index === self.findIndex(p => p.email === participant.email)
+    );
+
+    return uniqueParticipants;
+  }
+
+addParticipant(participant: Participant) {
+  // Obtén la lista actual de participantes
+  const currentParticipants = this.participantsSource.getValue();
+
+  // Añade el nuevo participante
+  const updatedParticipants = [...currentParticipants, participant];
+
+  // Actualiza el BehaviorSubject
+  this.participantsSource.next(updatedParticipants);
+}
 }

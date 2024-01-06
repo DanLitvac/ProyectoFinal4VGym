@@ -41,4 +41,20 @@
     right: 20px;
     top: 20px; /* Ajusta según la posición que prefieras */
   }
+  .slide {
+    display: flex;
+    justify-content: space-around;
+  }
   
+  .card {
+    flex-basis: calc(33% - 10px); /* Ajusta esto según tus necesidades */
+    margin: 5px;
+  }
+
+  .search-container, .carousel-container, .add-button-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px; /* Espaciado entre elementos, ajusta según necesidad */
+}
+
+
