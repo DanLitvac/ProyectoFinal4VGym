@@ -140,10 +140,15 @@ export class PageBodyComponent implements OnInit {
 
 
   generateFreeCards(count: number): CardData[] {
-    return Array.from({ length: count }, () => ({
+    const timeSlots = [
+      '10:00 - 11:30',
+      '13:30 - 15:00',
+      '17:30 - 19:00'
+    ];
+  
+    return Array.from({ length: count }, (_, index) => ({
       isFree: true,
-      time: 'Tiempo Libre',
-      // ...otros campos necesarios para una tarjeta libre...
+      time: timeSlots[index % timeSlots.length],
     }));
   }
   

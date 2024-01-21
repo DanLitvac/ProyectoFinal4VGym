@@ -66,10 +66,10 @@ export class CardDataService {
   }
 
   deleteCard(card: CardData) {
-    const currentCards = this.getCard().filter(c => c !== card);
+
     card.isFree = true;
     card.participants = [];
-    this.cardsSource.next([...currentCards, card]);
+  
   }
 
 
