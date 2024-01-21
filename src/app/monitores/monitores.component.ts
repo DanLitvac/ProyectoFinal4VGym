@@ -4,7 +4,7 @@ import { TabsComponent } from "../tabs/tabs.component";
 import { CardDataService, Participant } from '../servicies/input-data.service';
 import { CommonModule } from '@angular/common';
 import { Subject, takeUntil } from 'rxjs';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -12,7 +12,7 @@ import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
     standalone: true,
     templateUrl: './monitores.component.html',
     styleUrl: './monitores.component.scss',
-    imports: [NavBarComponent, TabsComponent ,CommonModule ,ReactiveFormsModule , NgbModule]
+    imports: [NavBarComponent, TabsComponent ,CommonModule ,ReactiveFormsModule , NgbModule , FormsModule]
 })
 export class MonitoresComponent implements OnInit , OnDestroy {
     @ViewChild('addParticipantModal') addParticipantModal!: TemplateRef<any>;
@@ -52,5 +52,12 @@ export class MonitoresComponent implements OnInit , OnDestroy {
 
     openAddParticipantModal() {
         this.modalService.open(this.addParticipantModal);
+      }
+
+      searchQuery: string = '';
+      
+    
+      filteredParticipants(): Participant[] {
+        return this.participants.filter(p => p.name.toLowerCase().includes(this.searchQuery.toLowerCase()));
       }
 }

@@ -44,36 +44,28 @@
 
 
 
-      <div *ngIf="cardsForToday.length > 0; else showFreeCards">
-        <div *ngFor="let card of cardsForToday" class="card mb-3" [ngClass]="{'text-white bg-success': card.isFree}">
-          
 
+     
+
+      <ng-template #showFreeCards>
+        <div *ngFor="let freeCard of generateFreeCards(3)" class="card mb-3 text-white bg-success">
           <div class="card-body">
             <h5 class="card-title">
-              <i id="add" *ngIf="getCardIconClass(card) === 'fas fa-plus-circle'" [class]="getCardIconClass(card)"
-                (click)="openModal(card, content)"></i>
-              {{ card.time }}
+              <i id="add" *ngIf="getCardIconClass(freeCard) === 'fas fa-plus-circle'" [class]="getCardIconClass(freeCard)"
+                (click)="openModal(freeCard, content)"></i>
+              {{ freeCard.time }}
             </h5>
             <div class="card-text">
-              <!-- Mostrar solo el nombre de los participantes -->
-              {{ getParticipantNames(card) }}
+              {{ getParticipantNames(freeCard) }}
               <div class="icon-container">
-                <i *ngIf="!card.isFree" class="fas fa-pencil-alt editar" (click)="openEditModal(card, content)"></i>
-                <i *ngIf="!card.isFree" class="fa-solid fa-trash borrar" (click)="deleteCard(card)"></i>
+                <i *ngIf="!freeCard.isFree" class="fas fa-pencil-alt editar" (click)="openEditModal(freeCard, content)"></i>
+                <i *ngIf="!freeCard.isFree" class="fa-solid fa-trash borrar" (click)="deleteCard(freeCard)"></i>
               </div>
             </div>
           </div>
-
-
-
-        </div>
-      </div>
-      
-      <ng-template #showFreeCards>
-        <div *ngFor="let freeCard of generateFreeCards(3)" class="card mb-3 text-white bg-success">
-          <!-- Contenido de la tarjeta libre -->
         </div>
       </ng-template>
+
       
       
       

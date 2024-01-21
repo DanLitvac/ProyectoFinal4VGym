@@ -39,9 +39,9 @@ export class CardDataService {
   currentParticipants: Observable<Participant[]> = this.participantsSource.asObservable();
 
   private cards: CardData[] = [
-    { time: "10:00 - 11:30", date: new Date("2023-11-21"), title: CardTitle.CitaOcupada, isFree: false, activityType: ActivityType.Spinning, participants: [{ name: "Miguel Goyena", email: "miguel@email.com", phone: "123456789" }] },
-    { time: "13:30 - 15:00", date: new Date("2023-11-21"), title: CardTitle.TiempoLibre, isFree: true },
-    { time: "17:30 - 19:00", date: new Date("2023-11-21"), title: CardTitle.CitaConMultiplesPersonas, isFree: false, activityType: ActivityType.BodyPump, participants: [{ name: "Miguel Goyena", email: "miguel@email.com", phone: "123456789" }, { name: "Lucia Rodriguez", email: "lucia@email.com", phone: "12343219" }] }
+    { time: "10:00 - 11:30", date: new Date("2024-1-21"), title: CardTitle.CitaOcupada, isFree: false, activityType: ActivityType.Spinning, participants: [{ name: "Miguel Goyena", email: "miguel@email.com", phone: "123456789" }] },
+    { time: "13:30 - 15:00", date: new Date("2024-1-21"), title: CardTitle.TiempoLibre, isFree: true },
+    { time: "17:30 - 19:00", date: new Date("2024-1-21"), title: CardTitle.CitaConMultiplesPersonas, isFree: false, activityType: ActivityType.BodyPump, participants: [{ name: "Miguel Goyena", email: "miguel@email.com", phone: "123456789" }, { name: "Lucia Rodriguez", email: "lucia@email.com", phone: "12343219" }] }
   ];
 
   constructor() { 
@@ -96,5 +96,8 @@ addParticipant(participant: Participant) {
 
   // Actualiza el BehaviorSubject
   this.participantsSource.next(updatedParticipants);
+
+  
 }
+
 }

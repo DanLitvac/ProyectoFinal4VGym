@@ -1,16 +1,17 @@
 
 <div class="search-container">
-    <input type="text" placeholder="Buscar..." />
-  </div>
+  <input type="text" placeholder="Buscar..." [(ngModel)]="searchQuery" />  </div>
   <div class="carousel-container">
   <ngb-carousel *ngIf="participants.length > 0" >
-    <ng-template ngbSlide *ngFor="let participant of participants; let i = index">
+    <ng-template ngbSlide *ngFor="let participant of filteredParticipants(); let i = index">
       <div class="card">
         <h3>{{ participant.name }}</h3>
         <p>{{ participant.email }}</p>
         <p>{{ participant.phone }}</p>
       </div>
     </ng-template>
+    
+    
   </ngb-carousel>
 </div>
 
